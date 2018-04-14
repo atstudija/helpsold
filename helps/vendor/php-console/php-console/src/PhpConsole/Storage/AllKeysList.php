@@ -1,19 +1,18 @@
 <?php
 
 namespace PhpConsole\Storage;
-use PhpConsole\Storage;
 
 /**
  * Abstract class for stores that manipulates with all keys data in memory
  *
  * @package PhpConsole
  * @version 3.1
- * @link http://consle.com
+ * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-abstract class AllKeysList extends Storage {
+abstract class AllKeysList extends \PhpConsole\Storage {
 
 	/**
 	 * Get all postponed keys data

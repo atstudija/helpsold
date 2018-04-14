@@ -315,11 +315,7 @@ abstract class ParserAbstract implements Parser
                             //$this->traceShift($this->errorSymbol);
                             ++$this->stackPos;
                             $stateStack[$this->stackPos] = $state = $action;
-
-                            // We treat the error symbol as being empty, so we reset the end attributes
-                            // to the end attributes of the last non-error symbol
-                            $this->endAttributeStack[$this->stackPos] = $this->endAttributeStack[$this->stackPos - 1];
-                            $this->endAttributes = $this->endAttributeStack[$this->stackPos - 1];
+                            $this->endAttributes = $this->endAttributeStack[$this->stackPos];
                             break;
 
                         case 3:
@@ -445,7 +441,6 @@ abstract class ParserAbstract implements Parser
                 if ($stmt instanceof Node\Stmt\Namespace_) {
                     $afterFirstNamespace = true;
                 } elseif (!$stmt instanceof Node\Stmt\HaltCompiler
-                        && !$stmt instanceof Node\Stmt\Nop
                         && $afterFirstNamespace && !$hasErrored) {
                     $this->emitError(new Error(
                         'No code may exist outside of namespace {}', $stmt->getAttributes()));
@@ -530,7 +525,6 @@ abstract class ParserAbstract implements Parser
             'string'   => true,
             'iterable' => true,
             'void'     => true,
-            'object'   => true,
         ];
 
         if (!$name->isUnqualified()) {

@@ -160,16 +160,11 @@ class Local extends AbstractAdapter
             return false;
         }
 
-        $type = 'file';
-
-        $result = compact('type', 'path');
-
         if ($visibility = $config->get('visibility')) {
             $this->setVisibility($path, $visibility);
-            $result['visibility'] = $visibility;
         }
 
-        return $result;
+        return compact('path', 'visibility');
     }
 
     /**
@@ -180,7 +175,7 @@ class Local extends AbstractAdapter
         $location = $this->applyPathPrefix($path);
         $stream = fopen($location, 'rb');
 
-        return ['type' => 'file', 'path' => $path, 'stream' => $stream];
+        return compact('stream', 'path');
     }
 
     /**
@@ -197,21 +192,14 @@ class Local extends AbstractAdapter
     public function update($path, $contents, Config $config)
     {
         $location = $this->applyPathPrefix($path);
+        $mimetype = Util::guessMimeType($path, $contents);
         $size = file_put_contents($location, $contents, $this->writeFlags);
 
         if ($size === false) {
             return false;
         }
 
-        $type = 'file';
-
-        $result = compact('type', 'path', 'size', 'contents');
-
-        if ($mimetype = Util::guessMimeType($path, $contents)) {
-            $result['mimetype'] = $mimetype;
-        }
-
-        return $result;
+        return compact('path', 'size', 'contents', 'mimetype');
     }
 
     /**
@@ -226,7 +214,7 @@ class Local extends AbstractAdapter
             return false;
         }
 
-        return ['type' => 'file', 'path' => $path, 'contents' => $contents];
+        return compact('contents', 'path');
     }
 
     /**
@@ -323,7 +311,7 @@ class Local extends AbstractAdapter
             $mimetype = Util\MimeType::detectByFilename($location);
         }
 
-        return ['path' => $path, 'type' => 'file', 'mimetype' => $mimetype];
+        return ['mimetype' => $mimetype];
     }
 
     /**
@@ -344,7 +332,7 @@ class Local extends AbstractAdapter
         $permissions = octdec(substr(sprintf('%o', fileperms($location)), -4));
         $visibility = $permissions & 0044 ? AdapterInterface::VISIBILITY_PUBLIC : AdapterInterface::VISIBILITY_PRIVATE;
 
-        return compact('path', 'visibility');
+        return compact('visibility');
     }
 
     /**
@@ -360,7 +348,7 @@ class Local extends AbstractAdapter
             return false;
         }
 
-        return compact('path', 'visibility');
+        return compact('visibility');
     }
 
     /**

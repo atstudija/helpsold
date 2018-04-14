@@ -20,5 +20,5 @@ return array(
     'dumperDumpSizeLimit' => 500000,
     'dumperDetectCallbacks' => true,
     'detectDumpTraceAndSource' => false,
-    'dataStorage' => new PhpConsole\Storage\File(storage_path('php-console.dat'), true),
+    'dataStorage' => new PhpConsole\Storage\File(storage_path('php-console.dat'), false),
 );

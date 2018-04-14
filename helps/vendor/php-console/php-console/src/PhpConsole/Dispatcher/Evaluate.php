@@ -1,48 +1,43 @@
 <?php
 
 namespace PhpConsole\Dispatcher;
-use PhpConsole\Connector;
-use PhpConsole\Dispatcher;
-use PhpConsole\Dumper;
-use PhpConsole\EvalProvider;
-use PhpConsole\EvalResultMessage;
 
 /**
  * Executes client code and sends result data to connector as client expected messages
  *
  * @package PhpConsole
  * @version 3.1
- * @link http://consle.com
+ * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-class Evaluate extends Dispatcher {
+class Evaluate extends \PhpConsole\Dispatcher {
 
-	/** @var EvalProvider */
+	/** @var \PhpConsole\EvalProvider */
 	protected $evalProvider;
 
 	/**
-	 * @param Connector $connector
-	 * @param EvalProvider $evalProvider
-	 * @param Dumper $dumper
+	 * @param \PhpConsole\Connector $connector
+	 * @param \PhpConsole\EvalProvider $evalProvider
+	 * @param \PhpConsole\Dumper $dumper
 	 */
-	public function __construct(Connector $connector, EvalProvider $evalProvider, Dumper $dumper) {
+	public function __construct(\PhpConsole\Connector $connector, \PhpConsole\EvalProvider $evalProvider, \PhpConsole\Dumper $dumper) {
 		$this->evalProvider = $evalProvider;
 		parent::__construct($connector, $dumper);
 	}
 
 	/**
 	 * Override eval provider
-	 * @param EvalProvider $evalProvider
+	 * @param \PhpConsole\EvalProvider $evalProvider
 	 */
-	public function setEvalProvider(EvalProvider $evalProvider) {
+	public function setEvalProvider(\PhpConsole\EvalProvider $evalProvider) {
 		$this->evalProvider = $evalProvider;
 	}
 
 	/**
 	 * Get eval provider
-	 * @return EvalProvider
+	 * @return \PhpConsole\EvalProvider
 	 */
 	public function getEvalProvider() {
 		return $this->evalProvider;
@@ -59,7 +54,7 @@ class Evaluate extends Dispatcher {
 			$result = $this->evalProvider->evaluate($code);
 			ini_set('display_errors', $oldDisplayErrors);
 
-			$message = new EvalResultMessage();
+			$message = new \PhpConsole\EvalResultMessage();
 			$message->return = $this->dumper->dump($result->return);
 			$message->output = $this->dumper->dump($result->output);
 			$message->time = round($result->time, 6);

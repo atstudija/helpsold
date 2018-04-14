@@ -11,7 +11,7 @@ namespace PhpConsole;
  *
  * @package PhpConsole
  * @version 3.1
- * @link http://consle.com
+ * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
@@ -49,9 +49,6 @@ class Handler {
 		$this->connector = Connector::getInstance();
 	}
 
-	/**
-	 * @codeCoverageIgnore
-	 */
 	private final function __clone() {
 	}
 
@@ -89,7 +86,7 @@ class Handler {
 	 */
 	public function setHandleErrors($isEnabled) {
 		$this->checkIsCalledBeforeStart();
-		$this->handleErrors = $isEnabled; // @codeCoverageIgnore
+		$this->handleErrors = $isEnabled;
 	}
 
 	/**
@@ -98,7 +95,7 @@ class Handler {
 	 */
 	public function setHandleExceptions($isEnabled) {
 		$this->checkIsCalledBeforeStart();
-		$this->handleExceptions = $isEnabled; // @codeCoverageIgnore
+		$this->handleExceptions = $isEnabled;
 	}
 
 	/**
@@ -147,6 +144,7 @@ class Handler {
 	 */
 	protected function initErrorsHandler() {
 		ini_set('display_errors', false);
+		ini_set('html_errors', false);
 		error_reporting($this->errorsHandlerLevel ? : E_ALL | E_STRICT);
 		$this->oldErrorsHandler = set_error_handler(array($this, 'handleError'));
 		register_shutdown_function(array($this, 'checkFatalErrorOnShutDown'));
@@ -155,7 +153,6 @@ class Handler {
 
 	/**
 	 * Method is called by register_shutdown_function(), it's required to handle fatal PHP errors. Never call it manually.
-	 * @codeCoverageIgnore
 	 */
 	public function checkFatalErrorOnShutDown() {
 		$error = error_get_last();

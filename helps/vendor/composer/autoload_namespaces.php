@@ -8,8 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'PhpConsole\\Laravel\\' => array($vendorDir . '/php-console/laravel-service-provider/src'),
+    'PhpConsole' => array($vendorDir . '/php-console/php-console/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
     'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
+    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
     'Baum' => array($vendorDir . '/baum/baum/src'),
 );
