@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Name=Dynamic Drive DHTML Scripts- Smooth Navigational Menu
+Comment=Open URL: http://dynamicdrive.com/dynamicindex1/ddsmoothmenu.htm
+Icon=applications-internet
+Name[en_US]=Dynamic Drive DHTML Scripts- Smooth Navigational Menu
+Comment[en_US]=Open URL: http://dynamicdrive.com/dynamicindex1/ddsmoothmenu.htm
+Icon[en_US]=applications-internet
+URL=http://dynamicdrive.com/dynamicindex1/ddsmoothmenu.htm
+Type=Link
